@@ -11,7 +11,7 @@ import {
 } from '@nestjsx/crud';
 import { AccountService } from './account.service';
 import { ApiTags } from '@nestjs/swagger';
-import { User } from 'src/user/entities/user.entity';
+import { SkipAuth } from '../decorators/auth.decorator';
 
 @Controller('account')
 @Crud({
@@ -31,6 +31,7 @@ export class AccountController implements CrudController<Account> {
   }
 
   // 重载原有的增加方法，在这里添加增加新用户信息的逻辑...
+  @SkipAuth()
   @Override()
   async createOne(@ParsedRequest() req: CrudRequest, @ParsedBody() dto: Account) {
     this.userService.createOne(req, { nickname: dto.account });
