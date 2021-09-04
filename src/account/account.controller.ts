@@ -21,11 +21,6 @@ import { SkipAuth } from '../decorators/auth.decorator';
   routes: {
     only: ['createOneBase', 'getOneBase', 'updateOneBase'],
   },
-  query: {
-    join: {
-      user: {},
-    }
-  }
 })
 @ApiTags("账号")
 export class AccountController implements CrudController<Account> {
@@ -39,7 +34,9 @@ export class AccountController implements CrudController<Account> {
   @SkipAuth()
   @Override()
   async createOne(@ParsedRequest() req: CrudRequest, @ParsedBody() dto: Account) {
-    this.userService.createOne(req, { nickname: dto.account });
+    const uuid = this.service.genUUID();
+    this.userService.createOne(req, { nickname: dto.account, accountId: uuid });
+    dto.id = uuid;
     return this.base.createOneBase(req, dto);
   }
 }

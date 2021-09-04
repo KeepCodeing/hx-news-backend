@@ -1,32 +1,30 @@
 import { User } from './../../user/entities/user.entity';
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, OneToOne, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class Account {
-  @PrimaryGeneratedColumn()
-  @JoinColumn()
-  id: number;
+  @PrimaryColumn()
+  id: string;
 
   @Column({
     length: 40,
-    nullable: false
+    nullable: false,
   })
   account: string;
 
   @Column({
     length: 50,
-    nullable: false
+    nullable: false,
   })
   password: string;
 
   @Column({
     length: 10,
     nullable: true,
-    default: 'normal'
+    default: 'normal',
   })
   role: string;
 
   @OneToOne((type) => User, (e) => e.account)
   user: User;
-  
 }
