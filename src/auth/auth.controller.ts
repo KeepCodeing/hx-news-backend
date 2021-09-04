@@ -1,3 +1,4 @@
+import { UserService } from './../user/user.service';
 import { LocalAuthGuard } from './local-auth.guard';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
@@ -16,10 +17,14 @@ export class AuthController {
   @Post('/login')
   @UseGuards(LocalAuthGuard)
   @ApiBody({ type: LoginDto })
-  login(@Request() req) {
-    return this.authService.genToken({
-      account: req.body.account,
-      password: req.body.password,
-    });
+  async login(@Request() req) {
+    // 注意auth的接口和其它的不一样，这里post的时候要传的是username和password...
+    return this.authService.getUserInfo(
+      {
+        account: req.body.account,
+        password: req.body.password,
+      },
+      req.user,
+    );
   }
 }

@@ -1,3 +1,5 @@
+import { UserService } from './../user/user.service';
+import { UserModule } from './../user/user.module';
 import { JwtStrategy } from './jwt.strategy';
 import { jwtContants } from './jwt.contants';
 import { AccountModule } from './../account/account.module';
@@ -14,6 +16,7 @@ import { JwtModule } from '@nestjs/jwt';
     PassportModule,
     AccountModule,
     JwtModule.register({ secret: jwtContants.secret }),
+    UserModule
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],
 })
