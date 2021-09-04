@@ -10,11 +10,13 @@ import { ApiTags } from '@nestjs/swagger';
     type: User
   },
   routes: {
-    // only: ['createOneBase', 'updateOneBase', 'getOneBase']
+    only: ['createOneBase', 'updateOneBase', 'getOneBase']
   },
   query: {
     join: {
-      account: {},
+      account: {
+        exclude: ['password'],
+      },
     }
   }
 })
