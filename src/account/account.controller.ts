@@ -21,6 +21,11 @@ import { SkipAuth } from '../decorators/auth.decorator';
   routes: {
     only: ['createOneBase', 'getOneBase', 'updateOneBase'],
   },
+  query: {
+    join: {
+      user: {},
+    }
+  }
 })
 @ApiTags("账号")
 export class AccountController implements CrudController<Account> {

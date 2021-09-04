@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { Controller, Post, Request, UseGuards } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
-import { SkipAuth } from 'src/decorators/auth.decorator';
+import { SkipAuth } from '../decorators/auth.decorator';
 
 @Controller('auth')
 @ApiTags('权限')

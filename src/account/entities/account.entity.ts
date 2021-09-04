@@ -1,9 +1,10 @@
 import { User } from './../../user/entities/user.entity';
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()
 export class Account {
   @PrimaryGeneratedColumn()
+  @JoinColumn()
   id: number;
 
   @Column({
