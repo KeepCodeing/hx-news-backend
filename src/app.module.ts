@@ -22,6 +22,7 @@ import { APP_GUARD } from '@nestjs/core'
       database: 'hx-backend',
       entities: [Account, User],
       synchronize: true,
+      logging: true
     }),
     UserModule,
     AuthModule,
