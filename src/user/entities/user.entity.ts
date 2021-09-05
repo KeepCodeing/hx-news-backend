@@ -1,8 +1,10 @@
+import { Article } from './../../article/entities/article.entity';
 import { Account } from './../../account/entities/account.entity';
 import {
   Column,
   Entity,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -52,4 +54,8 @@ export class User {
   @OneToOne((type) => Account, (e) => e.user)
   @JoinColumn({ name: 'accountId' })
   account: Account;
+
+  // 注意这里是一对多
+  @OneToMany((type) => Article, (artilce) => artilce.user)
+  article: Article
 }

@@ -1,3 +1,4 @@
+import { Article } from './article/entities/article.entity';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { User } from './user/entities/user.entity';
 import { Account } from './account/entities/account.entity';
@@ -9,6 +10,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core'
+import { ArticleModule } from './article/article.module';
 
 @Module({
   imports: [
@@ -20,12 +22,13 @@ import { APP_GUARD } from '@nestjs/core'
       username: 'root',
       password: '114514',
       database: 'hx-backend',
-      entities: [Account, User],
+      entities: [Account, User, Article],
       synchronize: true,
       logging: true
     }),
     UserModule,
     AuthModule,
+    ArticleModule,
   ],
   controllers: [AppController],
   providers: [AppService, {
