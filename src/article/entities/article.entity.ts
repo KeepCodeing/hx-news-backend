@@ -1,4 +1,4 @@
-import { Column, PrimaryGeneratedColumn, Entity, OneToOne, JoinColumn, OneToMany, ManyToOne } from 'typeorm';
+import { Column, PrimaryGeneratedColumn, Entity, OneToOne, JoinColumn, OneToMany, ManyToOne, CreateDateColumn } from 'typeorm';
 import { User } from '../../user/entities/user.entity';
 
 // 为什么文章中没有创建者ID？
@@ -22,13 +22,13 @@ export class Article {
 
   // 这里的judgerId和之前的accountId不同，它是创建时必须提供的一个参数，而不是自动
   // 生成
-  @Column({ unique: false })
+  @Column({ default: null })
   judgerId: number;
 
   @Column()
   authors: string;
 
-  @Column()
+  @CreateDateColumn()
   ctime: Date
 
   // 注意这里用的多对一，这里为什么不是一对一呢？因为考虑单个文章是一对一
