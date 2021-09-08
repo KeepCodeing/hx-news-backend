@@ -27,19 +27,21 @@ export class AuthService {
     return null;
   }
 
-  async genToken(loginDto: LoginDto) {
+  async genToken(user: any) {
     return {
-      token: this.jwtService.sign(loginDto)
+      token: this.jwtService.sign(user)
     }
   }
 
   async getUserInfo(loginDto: LoginDto, user: any) {
-    const userInfo = await this.userService.findOne({ accountId: user.id });
-    const { id, ...accountInfo } = user;
+    // const userInfo = await this.userService.findOne({ accountId: user.id });
+    const { id, role, account } = user;
     return {
-      token: (await this.genToken(loginDto)).token,
-      ...userInfo,
-      ...accountInfo,
+      token: (await this.genToken(user)).token,
+      // ...userInfo,
+      userId: id,
+      role,
+      account
     }
   }
 }

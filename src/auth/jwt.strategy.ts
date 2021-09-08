@@ -9,13 +9,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       // 获取请求header token值
       // 为什么用的是header里的token字段的原因
-      jwtFromRequest: ExtractJwt.fromHeader('token'),
+      // jwtFromRequest: ExtractJwt.fromHeader('Authorization'),
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: jwtContants.secret,
     });
   }
 
   async validate(payload: any) {
     //payload：jwt-passport认证jwt通过后解码的结果
-    return { account: payload.username, password: payload.password };
+    return { ...payload };
   }
 }
