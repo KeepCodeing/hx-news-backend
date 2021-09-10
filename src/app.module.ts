@@ -11,6 +11,8 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core'
 import { ArticleModule } from './article/article.module';
+import { ExcelModule } from './excel/excel.module';
+import { ExcelStudentInfo } from './excel/entities/excelstudentinfo.entity';
 
 @Module({
   imports: [
@@ -22,13 +24,14 @@ import { ArticleModule } from './article/article.module';
       username: 'root',
       password: '114514',
       database: 'hx-backend',
-      entities: [Account, User, Article],
+      entities: [Account, User, Article, ExcelStudentInfo],
       synchronize: true,
       logging: true
     }),
     UserModule,
     AuthModule,
     ArticleModule,
+    ExcelModule,
   ],
   controllers: [AppController],
   providers: [AppService, {
